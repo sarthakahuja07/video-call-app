@@ -1,11 +1,17 @@
-import React from 'react'
-import Button from '@mui/material/Button';
+import React from 'react';
+import Main from './components/MainComponent'
+import { configureStore } from './redux/configureStore';
+import { Provider } from 'react-redux';
 
 const App = () => {
+  const store = configureStore();
+
   return (
-    <div>
-      
-    </div>
+    <Provider store={store}>
+      <div>
+        <Main />
+      </div>
+    </Provider>
   )
 }
 

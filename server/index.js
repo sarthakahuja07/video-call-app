@@ -30,20 +30,16 @@ io.on('connection', (socket) => {
 
     // Calls a user using the "callUser" event by passing in data parameter that gives the signal, who the call is from and name of the person calling as an object
 
-    socket.on('callUser', (data) => {
-        io.to(data.to).emit('callUser', {
-            signal: data.signalData,
-            from: data.from,
-            to: data.to
-        });
-    })
+    socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+		io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+	});
     // accepts a call from another user using the "callUser" event AND GIVES THE SIGNAL DATA TO THE CALLER.
 
     socket.on('acceptCall', (data) => {
-        io.to(data.to).emit('acceptCall', data.signal);
+        io.to(data.to).emit('callAccepted', data.signal);
     })
 })
 
-server.listen(5000, () => {
+server.listen(port, () => {
     console.log(` Server Running a port ${port}`)
 })
