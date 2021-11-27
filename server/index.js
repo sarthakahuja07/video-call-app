@@ -31,7 +31,7 @@ io.on('connection', (socket) => {
     // Calls a user using the "callUser" event by passing in data parameter that gives the signal, who the call is from and name of the person calling as an object
 
     socket.on('callUser', (data) => {
-        io.to(data.userToCall).emit('callUser', {
+        io.to(data.to).emit('callUser', {
             signal: data.signalData,
             from: data.from,
             to: data.to
