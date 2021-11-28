@@ -18,11 +18,29 @@ export const setMe =(id)=>{
     }
 }
 
-export const setCall =(data)=>{
+export const setCall = (data)=>{
     return {
-        type: ActionTypes.SET_ME,
+        type: ActionTypes.SET_CALL,
         payload : {
             data
         }
     }
 }
+
+export const setCallAccepted = (bool)=>{
+    return {
+        type: ActionTypes.SET_CALL_ACCEPTED,
+        payload : {
+            bool
+        }
+    }
+}
+export const setCallEnded = (bool)=>{
+    return {
+        type: ActionTypes.SET_CALL_ENDED,
+        payload : {
+            bool
+        }
+    }
+}
+

@@ -11,7 +11,7 @@ const initialState={
 
 export const reducer = (state = initialState, action )=>{
     switch(action.type){
-        case ActionTypes.SET_USER_INFO:
+        case ActionTypes.SET_STREAM:
             return {    
                 // ...state,
                 // userInfo:action.userInfo
