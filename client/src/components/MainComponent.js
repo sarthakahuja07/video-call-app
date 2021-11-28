@@ -1,18 +1,21 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setStream, setMe, setCall, setCallAccepted, setCallEnded } from '../redux/actionCreator';
+import { setStream, setMe, setCall, setCallAccepted, setCallEnded, setMyVideoRef, setUserVideoRef } from '../redux/actionCreator';
 import { socket } from '../apis/socketApi';
 import Peer from 'simple-peer'
 import VideoPlayer from './VideoPlayerComponent';
-import { SocketContext } from '../context';
+// import { SocketContext } from '../context';
 
 const Main = () => {
-  const { myVideo, userVideo} = useContext(SocketContext);
+
+  // const { myVideo, userVideo} = useContext(SocketContext);
   const dispatch = useDispatch();
   const call = useSelector(state => state.call);
   const stream = useSelector(state => state.stream);
   const me = useSelector(state => state.me);
   const name = useSelector(state => state.name);
+  const myVideoLocalRef = useRef();
+  const userVideoLocalRef = useRef();
 
   const acceptCall = (dispatch) => {
     dispatch(setCallAccepted(true));
@@ -27,7 +30,7 @@ const Main = () => {
     peer.on('stream', (currentStream) => {
       // userVideo.current.srcObject = currentStream;
       // TODO: set uservideo ref
-      userVideo.current.srcObject = currentStream;
+      // userVideo.current.srcObject = currentStream;
     });
     peer.signal(call.signal);
     // TODO: set connection ref
@@ -46,7 +49,7 @@ const Main = () => {
     peer.on('stream', (currentStream) => {
       // userVideo.current.srcObject = currentStream;
       // TODO: set uservideo ref
-      userVideo.current.srcObject = currentStream;
+      // userVideo.current.srcObject = currentStream;
     });
 
     socket.on('callAccepted', (signal) => {
@@ -69,15 +72,21 @@ const Main = () => {
     window.location.reload();
   };
 
+  
   const setStates = () => {
-    navigator.mediaDevices.getUserMedia({ audio: true, video: true }).then(stream => {
-      dispatch(setStream(stream));
-      // TODO: set video refs
-      myVideo.current.srcObject = stream;
-    })
-      .catch((err) => {
+
+    const getUserMedia = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        myVideoLocalRef.current.srcObject = stream;
+        dispatch(setStream(stream));
+        dispatch(setMyVideoRef(myVideoLocalRef));
+
+      } catch (err) {
         console.log(err);
-      });
+      }
+    };
+    getUserMedia();
 
     socket.on('currentUser', (id) => {
       dispatch(setMe(id));
@@ -86,11 +95,11 @@ const Main = () => {
     socket.on('callUser', ({ from, name, signal }) => {
       dispatch(setCall({ isReceivingCall: true, from, name, signal }));
     })
+
   }
 
   useEffect(() => {
     setStates();
-
   }, [])
 
   return (

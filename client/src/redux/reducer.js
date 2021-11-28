@@ -7,6 +7,8 @@ const initialState = {
     callAccepted: false,
     callEnded: false,
     name: '',
+    myVideoRef: null,
+    userVideoRef: null
 };
 
 export const reducer = (state = initialState, action) => {
@@ -21,6 +23,10 @@ export const reducer = (state = initialState, action) => {
             return { ...state, callAccepted: action.payload.bool }
         case ActionTypes.SET_CALL_ENDED:
             return { ...state, callEnded: action.payload.bool }
+        case ActionTypes.SET_MY_VIDEO_REF:
+            return { ...state, myVideoRef: action.payload.myVideoRef }
+        case ActionTypes.SET_USER_VIDEO_REF:
+            return { ...state, userVideoRef: action.payload.userVideoRef }
         default:
             return { ...state, };
     }

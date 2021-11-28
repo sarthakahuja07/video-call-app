@@ -43,3 +43,21 @@ export const setCallEnded = (bool)=>{
         }
     }
 }
+
+export const setMyVideoRef= (myVideoRef) =>{
+    return{
+        type: ActionTypes.SET_MY_VIDEO_REF,
+        payload: {
+            myVideoRef
+        }
+    }
+}
+
+export const setUserVideoRef= (userVideoRef) =>{
+    return{
+        type: ActionTypes.SET_USER_VIDEO_REF,
+        payload: {
+            userVideoRef
+        }
+    }
+}
