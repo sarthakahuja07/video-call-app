@@ -18,6 +18,15 @@ export const setMe =(id)=>{
     }
 }
 
+export const setName =(name)=>{
+    return {
+        type: ActionTypes.SET_NAME,
+        payload : {
+            name
+        }
+    }
+}
+
 export const setCall = (data)=>{
     return {
         type: ActionTypes.SET_CALL,
