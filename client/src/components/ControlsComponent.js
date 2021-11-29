@@ -9,7 +9,7 @@ import { setStream, setMe, setCall, setCallAccepted, setCallEnded, setMyVideoRef
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const Controls = ({ leaveCall, callUser, userVideoLocalRef }) => {
+const Controls = ({ leaveCallUtil, callUserUtil, userVideoLocalRef }) => {
 	const dispatch = useDispatch();
 	const [idToCall, setIdToCall] = useState('');
 	const callAccepted = useSelector(state => state.callAccepted);
@@ -19,9 +19,14 @@ const Controls = ({ leaveCall, callUser, userVideoLocalRef }) => {
 
 
 	const setNameFunc = (e) => {
-		setName(e.target.value);
+		dispatch(setName(e.target.value));
+		// console.log(e);
 	}
 
+	const callFunc = () => {
+		// console.log("hi");
+		dispatch(callUserUtil(idToCall, userVideoLocalRef))
+	}
 
 	return (
 		<Container >
@@ -30,7 +35,7 @@ const Controls = ({ leaveCall, callUser, userVideoLocalRef }) => {
 					<Grid container >
 						<Grid item xs={12} md={6} >
 							<Typography gutterBottom variant="h6">Account Info</Typography>
-							<TextField label="Name" value={name} onChange={(e) => setNameFunc()} fullWidth />
+							<TextField label="Name" value={name} onChange={(e) => setNameFunc(e)} fullWidth />
 							<CopyToClipboard text={me} >
 								<Button variant="contained" color="primary" fullWidth startIcon={<Assignment fontSize="large" />}>
 									Copy Your ID
@@ -41,11 +46,11 @@ const Controls = ({ leaveCall, callUser, userVideoLocalRef }) => {
 							<Typography gutterBottom variant="h6">Make a call</Typography>
 							<TextField label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
 							{callAccepted && !callEnded ? (
-								<Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={() => { dispatch(leaveCall()) }} >
+								<Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={() => { dispatch(leaveCallUtil()) }} >
 									Hang Up
 								</Button>
 							) : (
-								<Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => {dispatch(callUser(idToCall, userVideoLocalRef))}} >
+								<Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={callFunc} >
 									Call
 								</Button>
 							)}

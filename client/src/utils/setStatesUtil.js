@@ -17,7 +17,7 @@ const setStatesUtil = (myVideoLocalRef) => (dispatch) => {
     };
     getUserMedia();
 
-    socket.on('currentUser', (id) => {
+    socket.on('me', (id) => {
         dispatch(setMe(id));
     })
 

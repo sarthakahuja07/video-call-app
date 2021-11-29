@@ -4,7 +4,7 @@ import { socket } from '../apis/socketApi';
 
 const leaveCallUtil = () => (dispatch) => {
 	dispatch(setCallEnded(true));
-
+	
 	// connectionRef.current.destroy();
 	// TODO: destroy connectionRef
 

@@ -9,7 +9,7 @@ const Notification = ({ acceptCall, userVideoLocalRef}) => {
     const callAccepted = useSelector(state => state.callAccepted);
     return (
         <React.Fragment>
-            {!call.isReceivingCall && !callAccepted && (
+            {call.isReceivingCall && !callAccepted && (
                 <div>
                     <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                         <h1>{call.name} is calling:</h1>

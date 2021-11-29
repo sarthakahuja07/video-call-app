@@ -9,8 +9,8 @@ const VideoPlayer =  forwardRef((props, ref) => {
     const callEnded = useSelector(state => state.callEnded);
     const call = useSelector(state => state.call);
     const name = useSelector(state => state.name);
-    const myVideoRef = useSelector(state => state.myVideoRef);
-    const userVideoRef = useSelector(state => state.userVideoRef);
+    // const myVideoRef = useSelector(state => state.myVideoRef);
+    // const userVideoRef = useSelector(state => state.userVideoRef);
     const { ref1, ref2 } = ref;
     // const {  myVideo, userVideo } = useContext(SocketContext);
     return (

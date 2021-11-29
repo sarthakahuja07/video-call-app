@@ -3,6 +3,7 @@ import Peer from 'simple-peer'
 import { socket } from '../apis/socketApi';
 
 const callUserUtil = (id, userVideoLocalRef) => (dispatch, getState) => {
+    console.log("Hi");
     const state = getState()
     const peer = new Peer({ initiator: true, trickle: false, stream: state.stream });
 

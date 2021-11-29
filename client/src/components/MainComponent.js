@@ -15,93 +15,9 @@ import setStatesUtil from '../utils/setStatesUtil';
 
 const Main = () => {
 
-	// const { myVideo, userVideo} = useContext(SocketContext);
 	const dispatch = useDispatch();
-	const call = useSelector(state => state.call);
-	const stream = useSelector(state => state.stream);
-	const me = useSelector(state => state.me);
-	const name = useSelector(state => state.name);
 	const myVideoLocalRef = useRef();
 	const userVideoLocalRef = useRef();
-
-
-	// const acceptCall = () => {
-	// 	dispatch(setCallAccepted(true));
-	// 	const peer = new Peer({
-	// 		initiator: false,
-	// 		trickle: false,
-	// 		stream
-	// 	});
-	// 	peer.on('signal', (data) => {
-	// 		socket.emit('acceptCall', { signal: data, to: call.from })
-	// 	});
-	// 	peer.on('stream', (currentStream) => {
-	// 		userVideoLocalRef.current.srcObject = currentStream;
-	// 	});
-	// 	peer.signal(call.signal);
-	// 	// TODO: set connection ref
-	// 	// connectionRef.current = peer;
-	// }
-
-
-
-	// const callUser = (id) => {
-	// 	const peer = new Peer({ initiator: true, trickle: false, stream });
-
-	// 	peer.on('signal', (data) => {
-	// 		socket.emit('callUser', { userToCall: id, signalData: data, from: me, name });
-	// 	});
-
-	// 	peer.on('stream', (currentStream) => {
-	// 		userVideoLocalRef.current.srcObject = currentStream;
-	// 	});
-
-	// 	socket.on('callAccepted', (signal) => {
-	// 		dispatch(setCallAccepted(true));
-	// 		peer.signal(signal);
-	// 	});
-	// 	// TODO: set connection ref
-	// 	// connectionRef.current = peer;
-	// };
-
-	// const leaveCall = () => {
-	// 	dispatch(setCallEnded(true));
-
-	// 	// connectionRef.current.destroy();
-	// 	// TODO: destroy connectionRef
-
-	// 	window.location.reload();
-	// };
-
-
-
-
-
-	// const setStates = () => {
-
-	// 	const getUserMedia = async () => {
-	// 		try {
-	// 			const currStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
-	// 			dispatch(setStream(currStream));
-	// 			myVideoLocalRef.current.srcObject = currStream;
-	// 			// dispatch(setMyVideoRef(myVideoLocalRef));
-
-	// 		} catch (err) {
-	// 			console.log(err);
-	// 		}
-	// 	};
-
-	// 	getUserMedia();
-
-	// 	socket.on('currentUser', (id) => {
-	// 		dispatch(setMe(id));
-	// 	})
-
-	// 	socket.on('callUser', ({ from, name, signal }) => {
-	// 		dispatch(setCall({ isReceivingCall: true, from, name, signal }));
-	// 	})
-
-	// }
 
 	useEffect(() => {
 		dispatch(setStatesUtil(myVideoLocalRef))
@@ -110,7 +26,7 @@ const Main = () => {
 	return (
 		<div>
 			<VideoPlayer ref={{ ref1: myVideoLocalRef, ref2: userVideoLocalRef }}></VideoPlayer>
-			<Controls leaveCall={leaveCallUtil} callUser={callUserUtil} userVideoLocalRef={userVideoLocalRef}></Controls>
+			<Controls leaveCallUtil={leaveCallUtil} callUserUtil={callUserUtil} userVideoLocalRef={userVideoLocalRef} ></Controls>
 			<Notification acceptCall={acceptCallUtil} userVideoLocalRef={userVideoLocalRef} />
 		</div>
 	)
