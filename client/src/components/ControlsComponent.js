@@ -9,7 +9,8 @@ import { setStream, setMe, setCall, setCallAccepted, setCallEnded, setMyVideoRef
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const Controls = ({ leaveCall, callUser }) => {
+const Controls = ({ leaveCall, callUser, userVideoLocalRef }) => {
+	const dispatch = useDispatch();
 	const [idToCall, setIdToCall] = useState('');
 	const callAccepted = useSelector(state => state.callAccepted);
 	const callEnded = useSelector(state => state.callEnded);
@@ -40,11 +41,11 @@ const Controls = ({ leaveCall, callUser }) => {
 							<Typography gutterBottom variant="h6">Make a call</Typography>
 							<TextField label="ID to call" value={idToCall} onChange={(e) => setIdToCall(e.target.value)} fullWidth />
 							{callAccepted && !callEnded ? (
-								<Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} >
+								<Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={() => { dispatch(leaveCall()) }} >
 									Hang Up
 								</Button>
 							) : (
-								<Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => callUser(idToCall)} >
+								<Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => {dispatch(callUser(idToCall, userVideoLocalRef))}} >
 									Call
 								</Button>
 							)}
