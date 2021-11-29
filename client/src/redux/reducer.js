@@ -14,10 +14,8 @@ const initialState = {
 export const reducer = (state = initialState, action) => {
     switch (action.type) {
         case ActionTypes.SET_STREAM: {
-
             return { ...state, stream: action.payload.stream };
         }
-
         case ActionTypes.SET_ME:
             return { ...state, me: action.payload.id }
         case ActionTypes.SET_CALL:

@@ -1,13 +1,14 @@
-import React, { useEffect, useContext, useRef, useCallback } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { setStream, setMe, setCall, setCallAccepted, setCallEnded, setMyVideoRef, setUserVideoRef } from '../redux/actionCreator';
+import { setStream, setMe, setCall, setCallAccepted, setCallEnded,} from '../redux/actionCreator';
 import { socket } from '../apis/socketApi';
 import Peer from 'simple-peer'
 import VideoPlayer from './VideoPlayerComponent';
 import Controls from './ControlsComponent';
+import Notification from './NotificationComponent';
 // import { SocketContext } from '../context';
-export const func= ()=>{
-	
+export const func = () => {
+
 }
 
 const Main = () => {
@@ -21,8 +22,8 @@ const Main = () => {
 	const myVideoLocalRef = useRef();
 	const userVideoLocalRef = useRef();
 
-	
-	const acceptCall = (dispatch) => {
+
+	const acceptCall = () => {
 		dispatch(setCallAccepted(true));
 		const peer = new Peer({
 			initiator: false,
@@ -54,7 +55,7 @@ const Main = () => {
 		});
 
 		socket.on('callAccepted', (signal) => {
-			setCallAccepted(true);
+			dispatch(setCallAccepted(true));
 			peer.signal(signal);
 		});
 		// TODO: set connection ref
@@ -106,13 +107,11 @@ const Main = () => {
 
 	return (
 		<div>
-			{/* Video player */}
-
 			<VideoPlayer ref={{ ref1: myVideoLocalRef, ref2: userVideoLocalRef }}></VideoPlayer>
 			<Controls leaveCall={leaveCall} callUser={callUser}></Controls>
-			{/* notifs */}
+			<Notification acceptCall={acceptCall} />
 		</div>
 	)
 }
 
-export default Main 
+export default Main
