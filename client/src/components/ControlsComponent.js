@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import React, { useState} from 'react';
 import { Button, TextField, Grid, Typography, Container, Paper } from '@mui/material';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Assignment, Phone, PhoneDisabled } from '@mui/icons-material';
 
-import { setStream, setMe, setCall, setCallAccepted, setCallEnded, setMyVideoRef, setUserVideoRef, setName } from '../redux/actionCreator';
+import { setName } from '../redux/actionCreator';
 
 
 import { useDispatch, useSelector } from 'react-redux';
@@ -21,11 +21,9 @@ const Controls = ({ leaveCallUtil, callUserUtil, userVideoLocalRef,connectionRef
 
 	const setNameFunc = (e) => {
 		dispatch(setName(e.target.value));
-		// console.log(e);
 	}
 
 	const callFunc = () => {
-		// console.log("hi");
 		dispatch(callUserUtil(idToCall, userVideoLocalRef,connectionRef));
 	}
 

@@ -1,4 +1,4 @@
-import { setStream, setMe, setCall, setCallAccepted, setCallEnded, } from '../redux/actionCreator';
+import { setCall, setCallAccepted, setCallEnded, } from '../redux/actionCreator';
 import Peer from 'simple-peer'
 import { socket } from '../apis/socketApi';
 

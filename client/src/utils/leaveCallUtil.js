@@ -1,5 +1,4 @@
-import { setStream, setMe, setCall, setCallAccepted, setCallEnded, } from '../redux/actionCreator';
-import Peer from 'simple-peer'
+import { setCall, setCallAccepted, setCallEnded, } from '../redux/actionCreator';
 import { socket } from '../apis/socketApi';
 
 const leaveCallUtil = (connectionRef) => (dispatch,getState) => {

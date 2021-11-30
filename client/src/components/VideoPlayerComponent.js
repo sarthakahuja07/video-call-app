@@ -1,7 +1,6 @@
-import React ,{useContext, forwardRef} from 'react'
+import React ,{forwardRef} from 'react'
 import { Grid, Typography, Paper, Box } from '@mui/material';
-import { useDispatch, useSelector } from 'react-redux';
-// import { SocketContext } from '../context';
+import { useSelector } from 'react-redux';
 
 const VideoPlayer =  forwardRef((props, ref) => {
     const stream = useSelector(state => state.stream);
@@ -9,10 +8,7 @@ const VideoPlayer =  forwardRef((props, ref) => {
     const callEnded = useSelector(state => state.callEnded);
     const call = useSelector(state => state.call);
     const name = useSelector(state => state.name);
-    // const myVideoRef = useSelector(state => state.myVideoRef);
-    // const userVideoRef = useSelector(state => state.userVideoRef);
     const { ref1, ref2 } = ref;
-    // const {  myVideo, userVideo } = useContext(SocketContext);
     return (
         <Grid container>
           {stream && (

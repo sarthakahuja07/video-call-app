@@ -1,8 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { setStream, setMe, setCall, setCallAccepted, setCallEnded, } from '../redux/actionCreator';
-import { socket } from '../apis/socketApi';
-import Peer from 'simple-peer'
+import { useDispatch } from 'react-redux';
 import VideoPlayer from './VideoPlayerComponent';
 import Controls from './ControlsComponent';
 import Notification from './NotificationComponent';
@@ -10,7 +7,6 @@ import acceptCallUtil from '../utils/acceptCallUtil';
 import callUserUtil from '../utils/callUserUtil';
 import leaveCallUtil from '../utils/leaveCallUtil';
 import setStatesUtil from '../utils/setStatesUtil'; 
-// import { SocketContext } from '../context';
 
 
 const Main = () => {
