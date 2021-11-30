@@ -25,6 +25,9 @@ const setStatesUtil = (myVideoLocalRef) => (dispatch) => {
         dispatch(setCall({ isReceivingCall: true, from, name, signal }));
     })
 
+    // socket.on('callDisconnected', () => {
+    //     dispatch(setCallEnded(true));
+    // });
 }
 
 export default setStatesUtil;

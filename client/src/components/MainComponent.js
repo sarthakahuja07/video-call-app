@@ -18,6 +18,7 @@ const Main = () => {
 	const dispatch = useDispatch();
 	const myVideoLocalRef = useRef();
 	const userVideoLocalRef = useRef();
+	const connectionRef  = useRef();
 
 	useEffect(() => {
 		dispatch(setStatesUtil(myVideoLocalRef))
@@ -26,8 +27,8 @@ const Main = () => {
 	return (
 		<div>
 			<VideoPlayer ref={{ ref1: myVideoLocalRef, ref2: userVideoLocalRef }}></VideoPlayer>
-			<Controls leaveCallUtil={leaveCallUtil} callUserUtil={callUserUtil} userVideoLocalRef={userVideoLocalRef} ></Controls>
-			<Notification acceptCall={acceptCallUtil} userVideoLocalRef={userVideoLocalRef} />
+			<Controls leaveCallUtil={leaveCallUtil} callUserUtil={callUserUtil} userVideoLocalRef={userVideoLocalRef} connectionRef = {connectionRef}></Controls>
+			<Notification acceptCallUtil={acceptCallUtil} userVideoLocalRef={userVideoLocalRef} connectionRef = {connectionRef} />
 		</div>
 	)
 }

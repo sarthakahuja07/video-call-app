@@ -23,7 +23,7 @@ const VideoPlayer =  forwardRef((props, ref) => {
               </Grid>
             </Paper>
           )}
-          {callAccepted && !callEnded && (
+          {call && callAccepted && !callEnded &&(
             <Paper>
               <Grid item xs={12} md={6}>
                 <Typography variant="h5" gutterBottom>{call.name || 'Name'}</Typography>
